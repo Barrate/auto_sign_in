@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">校园网自动认证</string>
+    <string name="des">使用说明：1.请不要删除tesseract/tessdata里面的文件;2.程序会启动一个每15秒检测一次wifi状态的服务，方便自动认证，如果不喜欢可以关闭，但关闭后每次要认证时都得先启动本程序，再点击开启服务按钮</string>
+</resources>
