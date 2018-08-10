@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
 import com.example.cqc.testopencv.jobservice.Myjob;
@@ -30,8 +31,7 @@ public class WelocmeIndex extends AppCompatActivity {
     private String id,psw;
     private CheckInfo  checkInfo ;
     private CopyFile copyFile ;
-//    private WebView webView;
-//    private String refererUrl;
+    private TextView about_tv,donate_tv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -42,10 +42,12 @@ public class WelocmeIndex extends AppCompatActivity {
         checkInfo = new CheckInfo(getApplicationContext());
         save = findViewById(R.id.save);
         openService = findViewById(R.id.openService);
-        //edittext
         username = findViewById(R.id.username);
         userpsw = findViewById(R.id.userpsw);
-        //webView = findViewById(R.id.index_webview);
+        about_tv = findViewById(R.id.about_tv);
+   //     about_tv.setTextIsSelectable(true);
+        donate_tv = findViewById(R.id.donate_tv);
+    //    donate_tv.setTextIsSelectable(true);
         //初始化控件
         initView();
         //申请权限
@@ -56,6 +58,16 @@ public class WelocmeIndex extends AppCompatActivity {
             public void onClick(View v) {
                 Intent stopIntent = new Intent(WelocmeIndex.this,AlwaysRunningService.class);
                 stopService(stopIntent);
+                JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+                jobScheduler.cancel(1);
+            }
+        });
+        Button about_btn = findViewById(R.id.about_btn);
+        about_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                about_tv.setText(R.string.about);
+                donate_tv.setText(R.string.donate);
             }
         });
     }
@@ -90,14 +102,10 @@ public class WelocmeIndex extends AppCompatActivity {
                    id = username.getText().toString();
                    psw = userpsw.getText().toString();
                    if("".equals(id)&&"".equals(psw)){
-                       Toast.makeText(getApplicationContext(),"请先输入学号，密码或者网址（^ v ^ )",Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(),"请先输入学号，密码（^ v ^ )",Toast.LENGTH_SHORT).show();
                    }else {
                        checkInfo.saveString("username",id);
                        checkInfo.saveString("userpsw",psw);
-//                       if(refererUrl.equals("http://baidu.com/")) {
-//                           checkInfo.saveString("referer", refererUrl);
-//                           Log.d("我的referer", refererUrl);
-                          // Toast.makeText(getApplicationContext(),refererUrl+"可以开启服务了",Toast.LENGTH_SHORT).show();
                            openService.setClickable(true);
                            Toast.makeText(getApplicationContext(),"信息已保存到data(SharePerferrence)（^ v ^ )",Toast.LENGTH_SHORT).show();
 //                       }else{

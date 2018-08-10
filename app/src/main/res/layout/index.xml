@@ -42,15 +42,7 @@
         android:layout_height="wrap_content"
         android:text="保存信息" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/des"
-        android:textColor="@color/colorAccent"
-        android:textSize="22dp"
-        tools:layout_editor_absoluteX="16dp" />
+
 
     <Button
         android:id="@+id/openService"
@@ -63,6 +55,26 @@
     android:text="关闭服务"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
-
-
+<Button
+    android:id="@+id/about_btn"
+    android:text="关于此应用"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:textIsSelectable="true"
+        android:id="@+id/about_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/des"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="16dp" />
+    <TextView
+        android:id="@+id/donate_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textIsSelectable="true"/>
 </LinearLayout>
