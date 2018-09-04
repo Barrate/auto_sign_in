@@ -61,7 +61,7 @@ public class SaveRefererActivity extends AppCompatActivity {
         super.onDestroy();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
-        Toast.makeText(this,"活动已经销毁",Toast.LENGTH_LONG).show();
+      //  Toast.makeText(this,"活动已经销毁",Toast.LENGTH_LONG).show();
     }
     public void  openPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

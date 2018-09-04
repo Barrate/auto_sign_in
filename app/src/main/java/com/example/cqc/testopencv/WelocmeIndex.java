@@ -58,6 +58,7 @@ public class WelocmeIndex extends AppCompatActivity {
             public void onClick(View v) {
                 Intent stopIntent = new Intent(WelocmeIndex.this,AlwaysRunningService.class);
                 stopService(stopIntent);
+                Toast.makeText(getApplicationContext(),"已关闭服务",Toast.LENGTH_SHORT).show();
                 JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
                 jobScheduler.cancel(1);
             }
@@ -67,7 +68,7 @@ public class WelocmeIndex extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 about_tv.setText(R.string.about);
-                donate_tv.setText(R.string.donate);
+                //donate_tv.setText(R.string.donate);
             }
         });
     }
@@ -107,7 +108,7 @@ public class WelocmeIndex extends AppCompatActivity {
                        checkInfo.saveString("username",id);
                        checkInfo.saveString("userpsw",psw);
                            openService.setClickable(true);
-                           Toast.makeText(getApplicationContext(),"信息已保存到data(SharePerferrence)（^ v ^ )",Toast.LENGTH_SHORT).show();
+                           Toast.makeText(getApplicationContext(),"信息已保存到（^ v ^ )",Toast.LENGTH_SHORT).show();
 //                       }else{
 //                           Toast.makeText(getApplicationContext(),"您当前使用的网络已经不需要认证了",Toast.LENGTH_SHORT).show();
 //                       }
@@ -121,6 +122,7 @@ public class WelocmeIndex extends AppCompatActivity {
                    public void onClick(View v) {
                        Log.d("我的log","服务正在开启");
                     // openService();
+                       Toast.makeText(getApplicationContext(),"已开启服务",Toast.LENGTH_SHORT).show();
                             checkInfo.saveBoolean("receiverisopen",true);
                        AlwaysRunningService service = new AlwaysRunningService();
                         intent = new Intent(WelocmeIndex.this,service.getClass());
