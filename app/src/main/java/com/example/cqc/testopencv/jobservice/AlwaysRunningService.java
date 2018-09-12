@@ -49,41 +49,49 @@ public class AlwaysRunningService extends JobIntentService {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        getLock(getApplicationContext());
+
+       // onHandleWork(intent);
+
         try {
-            Thread.sleep(3*1000);
+           Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if (CheckWifi.isZzuwlan(getApplicationContext())) {
+                        Log.d("我的job", "当前wifif是zzu");
+                        //获取ip地址
+                        if (!getlocalip().equals("")) {
+                            //将ip存入data文件
+                            checkInfo = new CheckInfo(getApplicationContext());
+                            Log.d("我的ip", getlocalip());
+                            checkInfo.saveString("ip", getlocalip());
+                            //判断当前网络是否需要认证
+                            boolean flag = CheckWifi.isWifiSetPortal();
+                            if (flag) {//需要认证
+                                Log.d("我的job", "开启自动认证");
+                                Intent intents = new Intent(getApplicationContext(), SaveRefererActivity.class);
+                                startActivity(intents);
+                            } else {
+                                Log.d("我的job", "已经认证过了");
+                            }
+                        }
+                    }else{
+                        isChanged=true;
+                    }
+                    onDestroy();
+                }
+            });
+            thread.start();
+            thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        onHandleWork(intent);
-        //onDestroy();
+     //   onDestroy();
         return super.onStartCommand(intent,flags,startId);
     }
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        if (CheckWifi.isZzuwlan(getApplicationContext())) {
-            Log.d("我的job", "当前wifif是zzu");
-            //获取ip地址
-            if (!getlocalip().equals("")) {
-                //将ip存入data文件
-                checkInfo = new CheckInfo(getApplicationContext());
-                Log.d("我的ip", getlocalip());
-                checkInfo.saveString("ip", getlocalip());
-                //判断当前网络是否需要认证
-                boolean flag = CheckWifi.isWifiSetPortal();
-                if (flag) {//需要认证
-                    Toast.makeText(getApplicationContext(),"开始认证",Toast.LENGTH_SHORT);
-                    Log.d("我的job", "开启自动认证");
-                    Intent intents = new Intent(getApplicationContext(), SaveRefererActivity.class);
-                    startActivity(intents);
-                } else {
-                    Log.d("我的job", "已经认证过了");
-                }
-            }
-        }else{
-            isChanged=true;
-        }
+
     }
     @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.O)
 

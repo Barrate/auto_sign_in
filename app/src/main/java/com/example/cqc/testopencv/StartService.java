@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
+import com.example.cqc.testopencv.jobservice.MyService;
 
 /**
  * Implementation of App Widget functionality.
@@ -27,7 +28,8 @@ public class StartService extends AppWidgetProvider {
             PendingIntent pendingIntent =    PendingIntent.getForegroundService(context.getApplicationContext(),0,intentb,0);
             views.setOnClickPendingIntent(R.id.appwidget_text,pendingIntent);
         }else{
-            PendingIntent pendingIntent =    PendingIntent.getService(context.getApplicationContext(),0,intentb,0);
+            Intent intenta = new Intent(context.getApplicationContext(),MyService.class);
+            PendingIntent pendingIntent =    PendingIntent.getService(context.getApplicationContext(),0,intenta,0);
             views.setOnClickPendingIntent(R.id.appwidget_text,pendingIntent);
         }
         appWidgetManager.updateAppWidget(appWidgetId, views);

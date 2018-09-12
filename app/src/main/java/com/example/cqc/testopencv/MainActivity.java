@@ -1,33 +1,14 @@
 package com.example.cqc.testopencv;
 
-import android.Manifest;
-
-import android.app.job.JobScheduler;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.View;
 import android.webkit.ValueCallback;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.example.cqc.testopencv.jobservice.Myjob;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -38,6 +19,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private  CheckInfo checkInfo;
+    private int maxTimes=0;
     //账号
     private String name ;
     //http请求的referer信息
@@ -57,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private  StringUtil stringUtil = new StringUtil();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("我的Mainctivity","oncreate。。。。。。。。。。。");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //加载类库
@@ -82,11 +65,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         useImagetool = new UseImagetool();
        // openPermission();
+        Log.d("我的Mainctivity","onStart。。。。。。。。。。。");
         super.onStart();
     }
     @Override
     protected void onResume() {
         initWebView();
+        Log.d("我的Mainctivity","onResume。。。。。。。。。。。");
         super.onResume();
     }
     //自定义内容
@@ -118,14 +103,6 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl(mainactivity_url,map);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
-            @Nullable
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                     if(request.getUrl().toString().equals(resultUrl)){
-                       view.loadUrl(mainactivity_url,map);
-                    }
-                return super.shouldInterceptRequest(view, request);
-            }
             @Override
             //网页加载完毕
             public void onPageFinished( WebView view, String url) {
@@ -133,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 if(url.contains(mainactivity_url)) {//仅在登陆界面执行该脚本
                    String code =  useImagetool.toDotool();
-                     String js = "javascript: document.getElementsByName('uid').item(0).value = '" +
+
+                    String js = "javascript: document.getElementsByName('uid').item(0).value = '" +
                             name
                             + "';document.getElementsByName('upw').item(0).value='" +
                             psw
@@ -141,8 +119,9 @@ public class MainActivity extends AppCompatActivity {
                             code
                             + "';document.getElementsByName('smbtn').item(0).click();" ;
                      Log.d("我的js",js);
-                            //执行脚本，在这之前要对验证吧码识别，并传入到js中,要在这之前进行验证码的识别
-                            view.evaluateJavascript(js, new ValueCallback<String>() {
+                            //执行脚本，在这之前要对验证码识别，并传入到js中,要在这之前进行验证码的识别
+
+                    view.evaluateJavascript(js, new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String s) {
                                     Log.d("网页登陆1","----------");
@@ -151,6 +130,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //自动点击界面按钮
                 String js2 = "javascript:document.getElementsByName('btn2').item(0).click();document.getElementById(\"btn_2\").click();";
+                if(maxTimes++>10) {//如果 连着十次左右还没成功认证，则让用户看到提示消息
+                    try {
+
+                        Thread.sleep(5 * 1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 view.evaluateJavascript(js2, new ValueCallback<String>() {
                     @Override
                     public void onReceiveValue(String s) {
@@ -183,4 +170,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Toast.makeText(this,"认证程序已经关闭",Toast.LENGTH_SHORT).show();
     }
+   
 }

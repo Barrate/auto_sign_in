@@ -33,22 +33,21 @@
             android:theme="@style/Theme.AppCompat.Dialog" />
 
         <service
-            android:name=".jobservice.Myjob"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
             android:name=".jobservice.AlwaysRunningService"
+            android:exported="true"
             android:enabled="true" />
-        <!--
-            <receiver android:name=".jobservice.OpenserviceReceiver"
+
+            <service android:name=".jobservice.MyService"
             android:exported="true"
             android:enabled="true"
-            >
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            </receiver>
-        -->
+            />
+        <!--
+    <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+    </intent-filter>
+    </receiver>
+-->
         <receiver android:name=".StartService">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

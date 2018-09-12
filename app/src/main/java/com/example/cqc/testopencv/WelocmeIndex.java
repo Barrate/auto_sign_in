@@ -1,12 +1,6 @@
 package com.example.cqc.testopencv;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,8 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
-import com.example.cqc.testopencv.jobservice.Myjob;
 
 public class WelocmeIndex extends AppCompatActivity {
     private Button save ;
