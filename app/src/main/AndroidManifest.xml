@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cqc.testopencv">
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -18,20 +19,27 @@
         <activity android:name=".WelocmeIndex">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
-            <activity android:name=".SaveRefererActivity"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".SaveRefererActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
-            <service android:name=".jobservice.Myjob"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
-        <service android:name=".jobservice.AlwaysRunningService"
-            android:enabled="true"/>
-      <!--  <receiver android:name=".jobservice.OpenserviceReceiver"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+
+        <service
+            android:name=".jobservice.Myjob"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".jobservice.AlwaysRunningService"
+            android:enabled="true" />
+        <!--
+            <receiver android:name=".jobservice.OpenserviceReceiver"
             android:exported="true"
             android:enabled="true"
             >
@@ -40,6 +48,16 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             </receiver>
-            -->
+        -->
+        <receiver android:name=".StartService">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/start_service_info" />
+        </receiver>
     </application>
+
 </manifest>

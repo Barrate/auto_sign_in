@@ -108,7 +108,8 @@ public class WelocmeIndex extends AppCompatActivity {
                        checkInfo.saveString("username",id);
                        checkInfo.saveString("userpsw",psw);
                            openService.setClickable(true);
-                           Toast.makeText(getApplicationContext(),"信息已保存到（^ v ^ )",Toast.LENGTH_SHORT).show();
+                           Toast.makeText(getApplicationContext(),"信息已保存（^ v ^ )",Toast.LENGTH_SHORT).show();
+                       save.setText("已保存");
 //                       }else{
 //                           Toast.makeText(getApplicationContext(),"您当前使用的网络已经不需要认证了",Toast.LENGTH_SHORT).show();
 //                       }
@@ -198,28 +199,7 @@ public class WelocmeIndex extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-//    private void initHandler(){
-//        handler = new Handler(){
-//            @Override
-//            public void handleMessage(Message msg) {
-//                switch (msg.what){
-//                    case  1:
-//                        Toast.makeText(WelocmeIndex.this,"当前认证路由器无法连接到网络",Toast.LENGTH_LONG).show();
-//                        break;
-//                        case 2:
-//                            Toast.makeText(WelocmeIndex.this,"当前认证路由器无法连接到网络",Toast.LENGTH_LONG).show();
-//                            break;
-//                    case 3:
-//                        refererUrl = msg.getData().getString("url");
-//                        checkInfo.saveString("refererUrl",refererUrl);
-//                        Toast.makeText(WelocmeIndex.this,refererUrl+"信息获取完毕，可以开启服务",Toast.LENGTH_LONG).show();
-//                        break;
-//
-//                }
-//            }
-//        };
-//
-//    }
+
     //判断当前服务是否已经存在
 private boolean isMyServiceRunning(Class<?> serviceClass) {
     ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
