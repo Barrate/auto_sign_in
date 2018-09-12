@@ -59,7 +59,6 @@ public class AlwaysRunningService extends JobIntentService {
         return super.onStartCommand(intent,flags,startId);
     }
 
-
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
         if (CheckWifi.isZzuwlan(getApplicationContext())) {
@@ -82,7 +81,7 @@ public class AlwaysRunningService extends JobIntentService {
                 }
             }
         } else {
-            Log.d("我的job", "当前wifif不是zzu");
+            Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的",Toast.LENGTH_SHORT).show();
         }
         try {
             Thread.sleep(5*1000);

@@ -25,13 +25,12 @@ import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
 import com.example.cqc.testopencv.jobservice.Myjob;
 
 public class WelocmeIndex extends AppCompatActivity {
-    private    Intent intent;
-    private Button save ,openService;
+    private Button save ;
     private EditText username,userpsw;
     private String id,psw;
     private CheckInfo  checkInfo ;
     private CopyFile copyFile ;
-    private TextView about_tv,donate_tv;
+    private TextView about_tv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -41,19 +40,18 @@ public class WelocmeIndex extends AppCompatActivity {
         //按钮
         checkInfo = new CheckInfo(getApplicationContext());
         save = findViewById(R.id.save);
-        openService = findViewById(R.id.openService);
+ //       openService = findViewById(R.id.openService);
         username = findViewById(R.id.username);
         userpsw = findViewById(R.id.userpsw);
         about_tv = findViewById(R.id.about_tv);
-   //     about_tv.setTextIsSelectable(true);
-        donate_tv = findViewById(R.id.donate_tv);
+        about_tv.setTextIsSelectable(true);
     //    donate_tv.setTextIsSelectable(true);
         //初始化控件
         initView();
         //申请权限
         openPermission();
-        Button closeBtn = findViewById(R.id.close_service);
-        closeBtn.setOnClickListener(new View.OnClickListener() {
+//        Button closeBtn = findViewById(R.id.close_service);
+      /*  closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent stopIntent = new Intent(WelocmeIndex.this,AlwaysRunningService.class);
@@ -62,7 +60,7 @@ public class WelocmeIndex extends AppCompatActivity {
                 JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
                 jobScheduler.cancel(1);
             }
-        });
+        });*/
         Button about_btn = findViewById(R.id.about_btn);
         about_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,27 +69,6 @@ public class WelocmeIndex extends AppCompatActivity {
                 //donate_tv.setText(R.string.donate);
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-//            webView.loadUrl("http://baidu.com");
-//        WebSettings settings = webView.getSettings();
-//        settings.setJavaScriptEnabled(true);
-//
-//            webView.setWebViewClient(new WebViewClient(){
-//                @Override
-//                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//                    return super.shouldOverrideUrlLoading(view,request);
-//                }
-//
-//                @Override
-//                public void onPageFinished(WebView view, String url) {
-//                    refererUrl = url;
-//                    super.onPageFinished(view, url);
-//                }
-//            });
-        super.onResume();
     }
 
     private  void initView(){
@@ -107,7 +84,7 @@ public class WelocmeIndex extends AppCompatActivity {
                    }else {
                        checkInfo.saveString("username",id);
                        checkInfo.saveString("userpsw",psw);
-                           openService.setClickable(true);
+                       //    openService.setClickable(true);
                            Toast.makeText(getApplicationContext(),"信息已保存（^ v ^ )",Toast.LENGTH_SHORT).show();
                        save.setText("已保存");
 //                       }else{
@@ -117,7 +94,7 @@ public class WelocmeIndex extends AppCompatActivity {
                    }
                }
            });
-           if(openService.isClickable()){
+    /*       if(openService.isClickable()){
                openService.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
@@ -133,7 +110,7 @@ public class WelocmeIndex extends AppCompatActivity {
                    }
                });
 
-           }
+           }*/
     }
 
 //    public  void openService(){
@@ -161,6 +138,7 @@ public class WelocmeIndex extends AppCompatActivity {
                 // 如果应用之前请求过此权限但用户拒绝了请求,且没有选择"不再提醒"选项 (后显示对话框解释为啥要这个权限)，此方法将返回 true。
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
                 } else {
                     // requestPermissions以标准对话框形式请求权限。123是识别码（任意设置的整型），用来识别权限。应用无法配置或更改此对话框。
                     //当应用请求权限时，系统将向用户显示一个对话框。当用户响应时，系统将调用应用的 onRequestPermissionsResult() 方法，向其传递用户响应。您的应用必须替换该方法，以了解是否已获得相应权限。回调会将您传递的相同请求代码传递给 requestPermissions()。
@@ -172,12 +150,12 @@ public class WelocmeIndex extends AppCompatActivity {
 
                 Log.d("我的Welcome",String.valueOf(checkInfo.getBoolean("saved")));
                 if(!checkInfo.getBoolean("saved")){//如果用户之前没保存过信息的话，open不可用
-                    openService.setClickable(false);
+                    //openService.setClickable(false);
                     checkInfo.saveBoolean("saved",true);
                     //将识别库保存到手机上
                     copyFile.copy(this);
                 }else{//保存过
-                    openService.setClickable(true);
+                  //  openService.setClickable(true);
                     save.setText("你已经保存过信息了，再次点击会覆盖");
                 }
             }
@@ -187,12 +165,12 @@ public class WelocmeIndex extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(!checkInfo.getBoolean("saved")){//如果用户之前没保存过信息的话，open不可用
-            openService.setClickable(false);
+         //   openService.setClickable(false);
             checkInfo.saveBoolean("saved",true);
             //将识别库保存到手机上
             copyFile.copy(this);
         }else{//保存过
-            openService.setClickable(true);
+           // openService.setClickable(true);
             save.setText("你已经保存过信息了，再次点击会覆盖");
         }
 
@@ -201,7 +179,7 @@ public class WelocmeIndex extends AppCompatActivity {
 
 
     //判断当前服务是否已经存在
-private boolean isMyServiceRunning(Class<?> serviceClass) {
+/*private boolean isMyServiceRunning(Class<?> serviceClass) {
     ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
     for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
         if (serviceClass.getName().equals(service.service.getClassName())) {
@@ -211,6 +189,6 @@ private boolean isMyServiceRunning(Class<?> serviceClass) {
     }
     Log.i ("isMyServiceRunning?", false+"");
     return false;
-}
+}*/
 
 }

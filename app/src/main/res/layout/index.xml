@@ -44,17 +44,17 @@
 
 
 
-    <Button
+   <!-- <Button
         android:id="@+id/openService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="启动服务"
-        android:textColor="@color/colorAccent" />
-<Button
+        android:textColor="@color/colorAccent" />-->
+<!--<Button
     android:id="@+id/close_service"
     android:text="关闭服务"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content" />-->
 <Button
     android:id="@+id/about_btn"
     android:text="关于此应用"

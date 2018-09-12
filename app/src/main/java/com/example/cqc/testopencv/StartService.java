@@ -1,10 +1,12 @@
 package com.example.cqc.testopencv;
 
+import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
@@ -40,5 +42,6 @@ public class StartService extends AppWidgetProvider {
     public void onEnabled(Context context) { }
     @Override
     public void onDisabled(Context context) { }
+
 }
 
