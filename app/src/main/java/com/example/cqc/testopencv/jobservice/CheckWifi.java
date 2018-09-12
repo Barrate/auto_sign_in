@@ -49,7 +49,6 @@ public class CheckWifi {
             if(wifiInfo.getSSID().contains("zzuwlan")){
                 return true;
             }else {
-                Log.d("我的，判断","当前wifi不是zzu的");
                 return false;
             }
         }else{

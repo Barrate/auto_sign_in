@@ -31,6 +31,7 @@ import java.util.TimerTask;
 public class AlwaysRunningService extends JobIntentService {
     private  CheckInfo checkInfo;
     private PowerManager.WakeLock mWakeLock;
+    private boolean isChanged= false;
 
     static void enqueueWork(Context context) {
         enqueueWork(context, AlwaysRunningService.class, 123, new Intent());
@@ -55,7 +56,7 @@ public class AlwaysRunningService extends JobIntentService {
             e.printStackTrace();
         }
         onHandleWork(intent);
-        onDestroy();
+        //onDestroy();
         return super.onStartCommand(intent,flags,startId);
     }
 
@@ -80,15 +81,9 @@ public class AlwaysRunningService extends JobIntentService {
                     Log.d("我的job", "已经认证过了");
                 }
             }
-        } else {
-            Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的",Toast.LENGTH_SHORT).show();
+        }else{
+            isChanged=true;
         }
-        try {
-            Thread.sleep(5*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
     @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.O)
 
@@ -175,7 +170,10 @@ public class AlwaysRunningService extends JobIntentService {
     @Override
     public void onDestroy() {
         Log.d("我的service","销毁");
-        Toast.makeText(getApplicationContext(),"服务已关闭",Toast.LENGTH_SHORT).show();
+        if(isChanged){
+            isChanged=false;
+            Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的",Toast.LENGTH_SHORT).show();
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             stopForeground(true);
         }
