@@ -1,6 +1,7 @@
 package com.example.cqc.testopencv;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,17 +43,14 @@ public class WelocmeIndex extends AppCompatActivity {
         initView();
         //申请权限
         openPermission();
-//        Button closeBtn = findViewById(R.id.close_service);
-      /*  closeBtn.setOnClickListener(new View.OnClickListener() {
+        Button closeBtn = findViewById(R.id.open_video);
+        closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent stopIntent = new Intent(WelocmeIndex.this,AlwaysRunningService.class);
-                stopService(stopIntent);
-                Toast.makeText(getApplicationContext(),"已关闭服务",Toast.LENGTH_SHORT).show();
-                JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-                jobScheduler.cancel(1);
+                Intent intent = new Intent(WelocmeIndex.this,Teach.class);
+                startActivity(intent);
             }
-        });*/
+        });
         Button about_btn = findViewById(R.id.about_btn);
         about_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,21 +120,14 @@ public class WelocmeIndex extends AppCompatActivity {
     //申请读写权限
     public void  openPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // 判断是否有这个权限，是返回PackageManager.PERMISSION_GRANTED，否则是PERMISSION_DENIED
-            // 这里我们要给应用授权所以是!= PackageManager.PERMISSION_GRANTED
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                // 如果应用之前请求过此权限但用户拒绝了请求,且没有选择"不再提醒"选项 (后显示对话框解释为啥要这个权限)，此方法将返回 true。
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
+            // 判断是否具有读写内存的权限
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 } else {
-                    // requestPermissions以标准对话框形式请求权限。123是识别码（任意设置的整型），用来识别权限。应用无法配置或更改此对话框。
-                    //当应用请求权限时，系统将向用户显示一个对话框。当用户响应时，系统将调用应用的 onRequestPermissionsResult() 方法，向其传递用户响应。您的应用必须替换该方法，以了解是否已获得相应权限。回调会将您传递的相同请求代码传递给 requestPermissions()。
+                   //请求权限
                     ActivityCompat.requestPermissions(this,
                             new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.INTERNET},
-                            123);
+                            1);
                 }
             }else {
 
@@ -175,7 +166,7 @@ public class WelocmeIndex extends AppCompatActivity {
     ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
     for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
         if (serviceClass.getName().equals(service.service.getClassName())) {
-            Log.i ("isMyServiceRunning?", true+"");
+            Log.i ("服务是否存在", true+"");
             return true;
         }
     }

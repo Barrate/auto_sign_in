@@ -34,20 +34,19 @@
 
         <service
             android:name=".jobservice.AlwaysRunningService"
-            android:exported="true"
-            android:enabled="true" />
-
-            <service android:name=".jobservice.MyService"
-            android:exported="true"
             android:enabled="true"
-            />
+            android:exported="true" />
+        <service
+            android:name=".jobservice.MyService"
+            android:enabled="true"
+            android:exported="true" />
         <!--
     <intent-filter>
         <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
         <category android:name="android.intent.category.DEFAULT"/>
     </intent-filter>
     </receiver>
--->
+        -->
         <receiver android:name=".StartService">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -57,6 +56,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/start_service_info" />
         </receiver>
+
+        <activity android:name=".Teach"></activity>
     </application>
 
 </manifest>
