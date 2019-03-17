@@ -1,17 +1,10 @@
 package com.example.cqc.testopencv;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
-import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -19,8 +12,6 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class UseImagetool  {
     /**
@@ -34,9 +25,9 @@ public class UseImagetool  {
      */
                // Bitmap图像OCR识别结果
     private TessBaseAPI tessBaseAPI;
-    private  String result;
+    private String result;
 
-    public  String toDotool() {
+    public String toDotool() {
             Thread thread =new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -47,11 +38,11 @@ public class UseImagetool  {
                     //最新图片已下载完
                     Log.d("我的图片：","正在处理图片");
                     File imgFile = new File(Environment.getExternalStorageDirectory().getPath()+"/MyWebView/temp/yanzhengma.jpg");
-                    String dest =Environment.getExternalStorageDirectory().getPath()+"/MyWebView/temp/yanzhengma1.jpg";
+                    String dest = Environment.getExternalStorageDirectory().getPath()+"/MyWebView/temp/yanzhengma1.jpg";
                     //需要二值化的图片的Mat对象
                     Mat src = Imgcodecs.imread(imgFile.toString());
                     //中间类
-                    Mat gray = new Mat(src.width(),src.height(),CvType.CV_8UC1);
+                    Mat gray = new Mat(src.width(),src.height(), CvType.CV_8UC1);
                     Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY,1);
                     //放大图片
                     ImageUtils imageutils = new ImageUtils(gray);
@@ -68,7 +59,7 @@ public class UseImagetool  {
                     //预处理后的图像存入sdcard/MyWebView/temp/yanzhengma1.jpg
                     Log.d("我的图片：","处理图片完成");
 
-                    String datapath =Environment.getExternalStorageDirectory().getPath()+"/tesseract/";
+                    String datapath = Environment.getExternalStorageDirectory().getPath()+"/tesseract/";
                     File dir = new File(datapath+"tessdata/");
                     if (!dir.exists()) {
                         if( !dir.mkdirs()){
@@ -79,7 +70,7 @@ public class UseImagetool  {
                     tessBaseAPI = new TessBaseAPI();
                     tessBaseAPI.init(datapath,"ma");
                     tessBaseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO);
-                    String dest1 =Environment.getExternalStorageDirectory().getPath()+"/MyWebView/temp/yanzhengma1.jpg";
+                    String dest1 = Environment.getExternalStorageDirectory().getPath()+"/MyWebView/temp/yanzhengma1.jpg";
                     File file = new File(dest1);
                     tessBaseAPI.setImage(file);
                     result = tessBaseAPI.getUTF8Text();

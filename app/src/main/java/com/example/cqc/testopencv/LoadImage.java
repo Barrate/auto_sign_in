@@ -1,7 +1,6 @@
 package com.example.cqc.testopencv;
 
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
 
 import java.io.File;

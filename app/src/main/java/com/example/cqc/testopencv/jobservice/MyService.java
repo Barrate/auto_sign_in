@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,17 +15,17 @@ import com.example.cqc.testopencv.CheckInfo;
 import com.example.cqc.testopencv.SaveRefererActivity;
 
 public class MyService extends Service {
-    private  CheckInfo checkInfo;
+    private CheckInfo checkInfo;
 private boolean isChanged=false;
     @Override
     public void onCreate() {
-        Toast.makeText(getApplicationContext(),"服务已创建",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"服务已创建", Toast.LENGTH_SHORT).show();
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(),"服务已启动",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"服务已启动", Toast.LENGTH_SHORT).show();
         try {
             Thread thread = new Thread(new Runnable() {
                 @Override
@@ -67,9 +66,9 @@ private boolean isChanged=false;
     public void onDestroy() {
         if(isChanged){
             isChanged=false;
-            Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(getApplicationContext(),"服务已关闭",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"服务已关闭", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 

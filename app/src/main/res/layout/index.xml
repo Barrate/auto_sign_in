@@ -42,19 +42,6 @@
         android:layout_height="wrap_content"
         android:text="保存信息" />
 
-
-
-   <!-- <Button
-        android:id="@+id/openService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="启动服务"
-        android:textColor="@color/colorAccent" />-->
-<Button
-    android:id="@+id/open_video"
-    android:text="打开演示视频"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
 <Button
     android:id="@+id/about_btn"
     android:text="关于此应用"

@@ -1,7 +1,7 @@
 package com.example.cqc.testopencv;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private  CheckInfo checkInfo;
+    private CheckInfo checkInfo;
     private int maxTimes=0;
     //账号
     private String name ;
@@ -27,16 +27,16 @@ public class MainActivity extends AppCompatActivity {
     //url
     private String mainactivity_url;
     //结果页url
-    private  String resultUrl;
+    private String resultUrl;
     //密码
     private String psw;
     //验证码识别结果
     private String result=null;
     private WebView webView= null;
-    private Map <String ,String> map = new HashMap<>();
+    private Map<String ,String> map = new HashMap<>();
     //验证码处理工具类
-    private  UseImagetool  useImagetool;
-    private  StringUtil stringUtil = new StringUtil();
+    private UseImagetool useImagetool;
+    private StringUtil stringUtil = new StringUtil();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("我的Mainctivity","oncreate。。。。。。。。。。。");
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient(){
             @Override
             //网页加载完毕
-            public void onPageFinished( WebView view, String url) {
+            public void onPageFinished(WebView view, String url) {
                 Log.d("我的网页，已加载完毕","当前url："+url);
                 super.onPageFinished(view, url);
                 if(url.contains(mainactivity_url)) {//仅在登陆界面执行该脚本
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 //                }
                  if(url.contains(resultUrl+"login2.zzj?id=")) {//验证成功页面
                     //关闭窗口
-                    Toast.makeText(MainActivity.this,"已经成功认证",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"已经成功认证", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this,"认证程序已经关闭",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"认证程序已经关闭", Toast.LENGTH_SHORT).show();
     }
    
 }

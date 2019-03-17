@@ -1,18 +1,35 @@
 package com.example.cqc.testopencv.jobservice;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static android.content.Context.WIFI_SERVICE;
-
 public class CheckWifi {
 
+    public static String getWiFiNameInP(Context context){
+        String wifiName = "unknown wifi";
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        NetworkInfo netwifiInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        wifiName = netwifiInfo.getExtraInfo();
+        if (wifiName.startsWith("\"")) {
+            wifiName = wifiName.substring(1, wifiName.length());
+        }
+        if (wifiName.endsWith("\"")) {
+            wifiName = wifiName.substring(0, wifiName.length() - 1);
+        }
+        Log.d("我的 checkwifi(android P)",wifiName);
+        return wifiName;
+    }
 
     public static boolean isWifiSetPortal() {
         String mWalledGardenUrl = "http://g.cn/generate_204";
@@ -40,19 +57,62 @@ public class CheckWifi {
         }
     }
     public static boolean isZzuwlan(Context context){
-        //获取当前连接的wifi信息
+       /*
+        //获取当前连接的wifi信息(适合android 8.0)
         WifiManager wifiManager= (WifiManager)context.getApplicationContext().getSystemService(WIFI_SERVICE);
-        WifiInfo wifiInfo = null;
+
         if (wifiManager != null) {
+            WifiInfo wifiInfo;
             wifiInfo = wifiManager.getConnectionInfo();
+            String wifiName = getWiFiNameInP(context);
             Log.d("我的 checkwifi：",""+wifiInfo.getSSID());
-            if(wifiInfo.getSSID().contains("zzuwlan")){
+            if(wifiInfo.getSSID().contains("zzuwlan")||wifiName.contains("zzuwlan"))
                 return true;
-            }else {
+            else
                 return false;
-            }
         }else{
+            //如果wifissid为空
+            String wifiName = getWiFiNameInP(context);
+            if(wifiName.contains("zzuwlan"))
+                return true;
+            else
             return false;
         }
+        */
+
+       String wifiName = getSSID(context);
+        Log.d("我的 checkwifi：",""+wifiName);
+       if(wifiName.contains("zzuwlan")){
+           return true;
+       }else{
+           return false;
+       }
     }
+ private static String getSSID(Context context){
+
+     String ssid="unknown id";
+
+     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O|| Build.VERSION.SDK_INT== Build.VERSION_CODES.P) {
+
+         WifiManager mWifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+         assert mWifiManager != null;
+         WifiInfo info = mWifiManager.getConnectionInfo();
+         return info.getSSID().replace("\"", "");
+     } else if (Build.VERSION.SDK_INT== Build.VERSION_CODES.O_MR1){
+
+         ConnectivityManager connManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+         assert connManager != null;
+         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+         if (networkInfo.isConnected()) {
+             if (networkInfo.getExtraInfo()!=null){
+                 return networkInfo.getExtraInfo().replace("\"","");
+             }
+         }
+     }
+     Log.d("我的 checkwifi：",""+ssid);
+     return ssid;
+
+ }
+
 }

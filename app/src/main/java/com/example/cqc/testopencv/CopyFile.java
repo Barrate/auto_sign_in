@@ -1,7 +1,6 @@
 package com.example.cqc.testopencv;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 

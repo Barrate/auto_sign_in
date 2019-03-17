@@ -2,7 +2,7 @@ package com.example.cqc.testopencv;
 
 public class StringUtil {
 
-    public String getReferer(String src,String ip) {
+    public String getReferer(String src, String ip) {
         int a =src.indexOf("=")+1;
         int b = src.indexOf("&");
         String temp="",temp1="";

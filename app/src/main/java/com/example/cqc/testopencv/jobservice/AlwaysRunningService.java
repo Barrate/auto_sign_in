@@ -2,10 +2,6 @@ package com.example.cqc.testopencv.jobservice;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.Service;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
@@ -25,11 +21,10 @@ import com.example.cqc.testopencv.R;
 import com.example.cqc.testopencv.SaveRefererActivity;
 
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class AlwaysRunningService extends JobIntentService {
-    private  CheckInfo checkInfo;
+    private CheckInfo checkInfo;
     private PowerManager.WakeLock mWakeLock;
     private boolean isChanged= false;
 
@@ -40,7 +35,7 @@ public class AlwaysRunningService extends JobIntentService {
     @Override
     public void onCreate() {
         //如果API在26以上即版本为O则调用startForefround()方法启动服务
-        Toast.makeText(getApplicationContext(),"服务已创建",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"服务已创建", Toast.LENGTH_SHORT).show();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             setForegroundService();
         }
@@ -154,7 +149,7 @@ public class AlwaysRunningService extends JobIntentService {
           synchronized private void getLock(Context context){
             if(mWakeLock==null){
             PowerManager mgr=(PowerManager)context.getSystemService(Context.POWER_SERVICE);
-            mWakeLock=mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,AlwaysRunningService.class.getName());
+            mWakeLock=mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, AlwaysRunningService.class.getName());
             mWakeLock.setReferenceCounted(true);
             Calendar c= Calendar.getInstance();
             c.setTimeInMillis((System.currentTimeMillis()));
@@ -180,7 +175,7 @@ public class AlwaysRunningService extends JobIntentService {
         Log.d("我的service","销毁");
         if(isChanged){
             isChanged=false;
-            Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(),"当前网络不是郑州大学的",Toast.LENGTH_SHORT).show();
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             stopForeground(true);
