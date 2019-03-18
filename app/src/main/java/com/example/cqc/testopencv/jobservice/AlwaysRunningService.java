@@ -1,7 +1,9 @@
 package com.example.cqc.testopencv.jobservice;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
@@ -11,6 +13,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.JobIntentService;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -19,23 +22,24 @@ import android.widget.Toast;
 import com.example.cqc.testopencv.CheckInfo;
 import com.example.cqc.testopencv.R;
 import com.example.cqc.testopencv.SaveRefererActivity;
+import com.example.cqc.testopencv.WelocmeIndex;
 
 import java.util.Calendar;
 
 
-public class AlwaysRunningService extends JobIntentService {
+public class AlwaysRunningService extends Service {
     private CheckInfo checkInfo;
     private PowerManager.WakeLock mWakeLock;
     private boolean isChanged= false;
 
-    static void enqueueWork(Context context) {
-        enqueueWork(context, AlwaysRunningService.class, 123, new Intent());
-    }
 
     @Override
     public void onCreate() {
         //如果API在26以上即版本为O则调用startForefround()方法启动服务
+
         Toast.makeText(getApplicationContext(),"服务已创建", Toast.LENGTH_SHORT).show();
+        //ActivityCompat.requestPermissions(this.get, new String[] {Manifest.permission.FOREGROUND_SERVICE},
+        //        2);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             setForegroundService();
         }
@@ -84,10 +88,6 @@ public class AlwaysRunningService extends JobIntentService {
         return super.onStartCommand(intent,flags,startId);
     }
 
-    @Override
-    protected void onHandleWork(@NonNull Intent intent) {
-
-    }
     @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.O)
 
 
@@ -111,6 +111,7 @@ public class AlwaysRunningService extends JobIntentService {
         //向系统注册通知渠道，注册后不能改变重要性以及其他通知行为
         NotificationManager notificationManager = (NotificationManager) getSystemService( Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
         //将服务置于启动状态 NOTIFICATION_ID指的是创建的通知的ID
