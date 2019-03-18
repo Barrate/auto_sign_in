@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cqc.testopencv">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -12,12 +13,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
+        android:networkSecurityConfig="@xml/http_accept"
         android:allowBackup="true"
         android:icon="@drawable/zzu"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".WelocmeIndex">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".WelcomeIndex">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,22 +36,7 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Dialog" />
 
-        <service
-            android:name=".jobservice.AlwaysRunningService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".jobservice.MyService"
-            android:enabled="true"
-            android:exported="true" />
-        <!--
-    <intent-filter>
-        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-    </intent-filter>
-    </receiver>
-        -->
-        <receiver android:name=".StartService">
+        <receiver android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -57,8 +45,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/start_service_info" />
         </receiver>
-
-        <activity android:name=".Teach"></activity>
     </application>
 
 </manifest>

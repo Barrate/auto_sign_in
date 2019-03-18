@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WelocmeIndex extends AppCompatActivity {
+public class WelcomeIndex extends AppCompatActivity {
     private Button save ;
     private EditText username,userpsw;
     private String id,psw;
@@ -82,10 +82,9 @@ public class WelocmeIndex extends AppCompatActivity {
                    //请求权限
                     ActivityCompat.requestPermissions(this,
                             new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.INTERNET,
-                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.FOREGROUND_SERVICE},
+                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                             1);
-                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.FOREGROUND_SERVICE},
-                            2);
+
             }else {
                 Log.d("我的Welcome", String.valueOf(checkInfo.getBoolean("saved")));
                 if(!checkInfo.getBoolean("saved")){//如果用户之前没保存过信息的话，open不可用

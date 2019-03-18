@@ -34,7 +34,7 @@ public class CheckWifi {
     public static boolean isWifiSetPortal() {
         String mWalledGardenUrl = "http://g.cn/generate_204";
         // 设置请求超时
-        int WALLED_GARDEN_SOCKET_TIMEOUT_MS = 6000;
+        int WALLED_GARDEN_SOCKET_TIMEOUT_MS = 3000;
         HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(mWalledGardenUrl);
@@ -43,11 +43,14 @@ public class CheckWifi {
             urlConnection.setConnectTimeout(WALLED_GARDEN_SOCKET_TIMEOUT_MS);
             urlConnection.setReadTimeout(WALLED_GARDEN_SOCKET_TIMEOUT_MS);
             urlConnection.setUseCaches(false);
-            urlConnection.getInputStream();
+            //urlConnection.getInputStream();
             // 判断返回状态码是否204
+            Log.d("Checkwifi:","是否需要认证："+(urlConnection.getResponseCode()!=204));
             return urlConnection.getResponseCode()!=204;
         } catch (IOException e) {
-            //   e.printStackTrace();
+            Log.v("Checkwifi",e.getMessage());
+               e.printStackTrace();
+
             return false;
         } finally {
             if (urlConnection != null) {

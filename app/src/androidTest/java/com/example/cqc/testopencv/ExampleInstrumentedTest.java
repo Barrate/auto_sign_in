@@ -3,9 +3,15 @@ package com.example.cqc.testopencv;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.IOException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import static org.junit.Assert.*;
 
@@ -23,4 +29,5 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.cqc.testopencv", appContext.getPackageName());
     }
+
 }
