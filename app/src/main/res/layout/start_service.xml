@@ -2,7 +2,6 @@
     android:layout_width="60dp"
     android:layout_height="60dp"
     android:background="#030099CC"
-
     >
 
     <Button
@@ -12,10 +11,9 @@
         android:layout_height="match_parent"
         android:background="#00CC0088"
         android:contentDescription="@string/appwidget_text"
-        android:gravity="top"
+        android:gravity="center_horizontal"
         android:text="@string/appwidget_text"
         android:textColor="#FFEB3B"
         android:textSize="15sp"
         android:textStyle="bold|italic" />
-
 </LinearLayout>

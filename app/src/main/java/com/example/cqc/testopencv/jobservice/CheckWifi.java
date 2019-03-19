@@ -45,7 +45,7 @@ public class CheckWifi {
             urlConnection.setUseCaches(false);
             //urlConnection.getInputStream();
             // 判断返回状态码是否204
-            Log.d("Checkwifi:","是否需要认证："+(urlConnection.getResponseCode()!=204));
+            Log.v("Checkwifi:","是否需要认证："+(urlConnection.getResponseCode()!=204));
             return urlConnection.getResponseCode()!=204;
         } catch (IOException e) {
             Log.v("Checkwifi",e.getMessage());
