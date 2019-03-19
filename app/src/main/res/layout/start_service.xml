@@ -2,17 +2,19 @@
     android:layout_width="60dp"
     android:layout_height="60dp"
     android:background="#030099CC"
+
     >
 
-    <TextView
+    <Button
+        android:theme="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/appwidget_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000092CC"
+        android:background="#00CC0088"
         android:contentDescription="@string/appwidget_text"
-        android:gravity="center"
+        android:gravity="top"
         android:text="@string/appwidget_text"
-        android:textColor="#74E91E63"
+        android:textColor="#FFEB3B"
         android:textSize="15sp"
         android:textStyle="bold|italic" />
 

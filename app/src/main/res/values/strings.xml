@@ -3,6 +3,6 @@
 
     <string name="des">使用说明：1.学号和密码一定要确认无误！！！2.请不要删除tesseract/tessdata里面的文件;3.保存信息后在桌面添加小部件用来开启认证服务</string>
     <string name="about">APP已经不再进行维护，源码已分享，github地址：https://github.com/cqc233/auto_sign_in</string>
-    <string name="appwidget_text">开启</string>
+    <string name="appwidget_text">认证</string>
     <string name="add_widget">Add widget</string>
 </resources>

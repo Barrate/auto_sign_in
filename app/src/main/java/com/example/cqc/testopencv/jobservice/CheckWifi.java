@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class CheckWifi {
 
-    public static String getWiFiNameInP(Context context){
+    public  String getWiFiNameInP(Context context){
         String wifiName = "unknown wifi";
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -31,7 +31,7 @@ public class CheckWifi {
         return wifiName;
     }
 
-    public static boolean isWifiSetPortal() {
+    public  boolean isWifiSetPortal() {
         String mWalledGardenUrl = "http://g.cn/generate_204";
         // 设置请求超时
         int WALLED_GARDEN_SOCKET_TIMEOUT_MS = 3000;
@@ -59,29 +59,7 @@ public class CheckWifi {
             }
         }
     }
-    public static boolean isZzuwlan(Context context){
-       /*
-        //获取当前连接的wifi信息(适合android 8.0)
-        WifiManager wifiManager= (WifiManager)context.getApplicationContext().getSystemService(WIFI_SERVICE);
-
-        if (wifiManager != null) {
-            WifiInfo wifiInfo;
-            wifiInfo = wifiManager.getConnectionInfo();
-            String wifiName = getWiFiNameInP(context);
-            Log.d("我的 checkwifi：",""+wifiInfo.getSSID());
-            if(wifiInfo.getSSID().contains("zzuwlan")||wifiName.contains("zzuwlan"))
-                return true;
-            else
-                return false;
-        }else{
-            //如果wifissid为空
-            String wifiName = getWiFiNameInP(context);
-            if(wifiName.contains("zzuwlan"))
-                return true;
-            else
-            return false;
-        }
-        */
+    public  static boolean isZzuwlan(Context context){
 
        String wifiName = getSSID(context);
         Log.d("我的 checkwifi：",""+wifiName);
