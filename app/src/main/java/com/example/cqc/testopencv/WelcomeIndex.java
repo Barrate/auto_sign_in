@@ -46,7 +46,7 @@ public class WelcomeIndex extends AppCompatActivity {
         initView();
         //申请权限
         openPermission();
-
+    /*
         Button about_btn = findViewById(R.id.about_btn);
         about_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +55,7 @@ public class WelcomeIndex extends AppCompatActivity {
                 //donate_tv.setText(R.string.donate);
             }
         });
+        */
     }
 
     private  void initView(){

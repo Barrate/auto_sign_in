@@ -44,7 +44,6 @@ public class StartService extends AppWidgetProvider {
         Log.v("StartService", "开启自动认证");
         Intent intent = new Intent(context.getApplicationContext(), AlwaysRunningService.class);
         intent.setAction("open");
-        intent.setData(Uri.parse("id:" + rsID));
         PendingIntent pendingIntent = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             pendingIntent = PendingIntent.getForegroundService(context.getApplicationContext(), 0, intent, 0);
