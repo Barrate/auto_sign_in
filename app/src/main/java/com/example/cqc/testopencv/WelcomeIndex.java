@@ -1,11 +1,13 @@
 package com.example.cqc.testopencv;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
+
 public class WelcomeIndex extends AppCompatActivity {
-    private Button save ;
+    private Button save,checkPermission,startService ;
     private EditText username,userpsw;
     private String id,psw;
     private CheckInfo checkInfo ;
@@ -33,6 +37,7 @@ public class WelcomeIndex extends AppCompatActivity {
         //按钮
         checkInfo = new CheckInfo(getApplicationContext());
         save = findViewById(R.id.save);
+        startService = findViewById(R.id.startService);
         username = findViewById(R.id.username);
         userpsw = findViewById(R.id.userpsw);
         about_tv = findViewById(R.id.about_tv);
@@ -71,6 +76,14 @@ public class WelcomeIndex extends AppCompatActivity {
                }
            });
 
+            startService.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(WelcomeIndex.this, AlwaysRunningService.class);
+                    startForegroundService(intent);
+                }
+            });
     }
 
     //申请读写权限

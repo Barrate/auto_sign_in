@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:networkSecurityConfig="@xml/http_accept"
         android:allowBackup="true"
@@ -35,8 +36,11 @@
             android:name=".SaveRefererActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Dialog" />
-
-        <receiver android:name=".StartActivity">
+        <service
+            android:name=".jobservice.AlwaysRunningService"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".StartService">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

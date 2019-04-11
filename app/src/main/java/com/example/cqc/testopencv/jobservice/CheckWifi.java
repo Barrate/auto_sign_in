@@ -31,7 +31,7 @@ public class CheckWifi {
         return wifiName;
     }
 
-    public  boolean isWifiSetPortal() {
+    public static boolean  isWifiSetPortal() {
         String mWalledGardenUrl = "http://g.cn/generate_204";
         // 设置请求超时
         int WALLED_GARDEN_SOCKET_TIMEOUT_MS = 3000;
