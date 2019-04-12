@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -18,7 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cqc.testopencv.jobservice.AlwaysRunningService;
+import com.example.cqc.testopencv.jobservice.ForegroundService;
+
+import java.io.File;
 
 public class WelcomeIndex extends AppCompatActivity {
     private Button save,checkPermission,startService ;
@@ -58,6 +61,19 @@ public class WelcomeIndex extends AppCompatActivity {
         */
     }
 
+
+    @Override
+    protected void onStart() {
+        //文件被删除的话重新复制一次
+        if(isDelete()){
+            if(copyFile==null) {
+                copyFile = new CopyFile();
+            }
+            copyFile.copy(this);
+        }
+        super.onStart();
+    }
+
     private  void initView(){
            save.setOnClickListener(new View.OnClickListener() {
                @Override
@@ -81,7 +97,7 @@ public class WelcomeIndex extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(WelcomeIndex.this, AlwaysRunningService.class);
+                    Intent intent = new Intent(WelcomeIndex.this, ForegroundService.class);
                     startForegroundService(intent);
                 }
             });
@@ -128,4 +144,14 @@ public class WelcomeIndex extends AppCompatActivity {
      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+
+    /**
+     *
+     * @return 识别库文件是否被删除，
+     */
+    public boolean isDelete(){
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/tesseract/tessdata/ma.traineddata");
+        boolean flag = !file.exists();
+        return flag;
+    }
 }

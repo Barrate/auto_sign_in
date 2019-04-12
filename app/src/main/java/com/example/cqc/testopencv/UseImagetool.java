@@ -57,9 +57,10 @@ public class UseImagetool  {
                     ImageUtils imageUtils1 = new ImageUtils(src);
                     imageUtils1.saveImg(dest);
                     //预处理后的图像存入sdcard/MyWebView/temp/yanzhengma1.jpg
-                    Log.d("我的图片：","处理图片完成");
+                    Log.d("UseImagetool图片：","处理图片完成");
 
-                    String datapath = Environment.getExternalStorageDirectory().getPath()+"/tesseract/";
+                    String datapath = Environment.getExternalStorageDirectory().getPath()+"/Android/data/com.zzuwalnrec.cqc/tesseract/";
+
                     File dir = new File(datapath+"tessdata/");
                     if (!dir.exists()) {
                         if( !dir.mkdirs()){
@@ -68,13 +69,18 @@ public class UseImagetool  {
                     }
                     //图像识别
                     tessBaseAPI = new TessBaseAPI();
+                    //尝试使用assets里面的文件  例如 file:///android_asset/win8_Demo/index.html
+                    //尝试失败
                     tessBaseAPI.init(datapath,"ma");
+                    Log.d("UseImagetool:加载字库","完毕");
+
+
                     tessBaseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO);
                     String dest1 = Environment.getExternalStorageDirectory().getPath()+"/MyWebView/temp/yanzhengma1.jpg";
                     File file = new File(dest1);
                     tessBaseAPI.setImage(file);
                     result = tessBaseAPI.getUTF8Text();
-                    Log.d("我的线程","执行完毕！");
+                    Log.d("UseImagetool:线程","执行完毕！");
                 }
             });
               thread.start();

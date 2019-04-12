@@ -37,7 +37,7 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <service
-            android:name=".jobservice.AlwaysRunningService"
+            android:name=".jobservice.ForegroundService"
             android:enabled="true"
             android:exported="true" />
         <receiver android:name=".StartService">

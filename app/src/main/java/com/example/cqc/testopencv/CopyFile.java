@@ -13,8 +13,11 @@ public class   CopyFile {
 
     public  void copy(Context context){
      //   File srcfile = new File(Environment.getExternalStorageDirectory().getPath()+"/tesseract");
-        File dirfile = new File(Environment.getExternalStorageDirectory().getPath()+"/tesseract/tessdata");
-        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/tesseract/tessdata/ma.traineddata");
+        //File dirfile = new File(Environment.getExternalStorageDirectory().getPath()+"/tesseract/tessdata");
+        String dirPath = Environment.getExternalStorageDirectory().getPath()+"/Android/data/com.zzuwalnrec.cqc/tesseract/tessdata";
+        File dirfile = new File(dirPath);
+        //File file = new File(Environment.getExternalStorageDirectory().getPath()+"/tesseract/tessdata/ma.traineddata");
+        File file = new File(dirPath+"/ma.traineddata");
         if(!dirfile.exists()){
             //如果存在就结束当前方法
             try {
