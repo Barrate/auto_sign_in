@@ -7,6 +7,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -65,7 +66,10 @@ public class CheckWifi {
         Log.d("我的 checkwifi：",""+wifiName);
        if(wifiName.contains("zzuwlan")){
            return true;
-       }else{
+       }else {
+           if(wifiName.contains("unknown ssid")){
+               Toast.makeText(context,"无法获取WiFI名称，请确认GPS是否为低电或者高精度模式",Toast.LENGTH_LONG).show();
+           }
            return false;
        }
     }
